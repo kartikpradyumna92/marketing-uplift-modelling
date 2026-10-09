@@ -4,8 +4,10 @@
 
 Uplift = conversion rate of users who saw the ad − conversion rate of users who did not.
 
-**Data:** Criteo Uplift dataset (search "Criteo uplift" on Kaggle) · 13.98M users · 12 anonymous features · ~85% treated / 15% control · conversion ~0.29%.
-Download it and put the CSV in a `data/` folder (not included here).
+**Kaggle notebook:** [marketing-ulift-modelling](https://www.kaggle.com/code/kartikpradyumna92/marketing-ulift-modelling)
+
+**Data:** [Criteo Uplift dataset](https://www.kaggle.com/datasets/arashnic/uplift-modeling) · 13.98M users · 12 anonymous features · ~85% treated / 15% control · conversion ~0.29%.
+The notebook downloads it with `kagglehub` (not included in this repo).
 
 ## Flow
 
@@ -70,7 +72,13 @@ Download it and put the CSV in a `data/` folder (not included here).
 ## Run it
 
 - Python, `pandas`, `statsmodels`, `matplotlib`, `xgboost`, `causalml`
-- Versions used (pinned in the notebook's first cell): `causalml` 0.17.0, `xgboost` 3.4.1, `scikit-learn` 1.9.0. Other versions can give different T-learner results.
+- Versions used: `causalml` 0.17.0, `xgboost` 3.4.1, `scikit-learn` 1.9.0 (pinned in the notebook's first cell), `numpy` 2.5.2, `pandas` 3.0.5, Python 3.12.
 - On Mac: `brew install libomp` (needed by XGBoost), then restart the kernel.
 - Open `marketing_uplift_modelling.ipynb` and run all cells.
 
+## Kaggle results differ
+
+The results above come from a local run. The Kaggle notebook gives a different T-learner score: T-v1 test Qini is **0.27** on Kaggle against **0.38** locally.
+
+- Same data, same train/test split, and same library versions in both runs (checked).
+- The remaining differences are Python (3.13 on Kaggle, 3.12 locally) and the machine. XGBoost can build slightly different trees on different hardware, and the T-learner, which subtracts two models, is the most sensitive to that.

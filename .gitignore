@@ -3,3 +3,4 @@
 .DS_Store
 data/
 *.csv
+.serena/project.yml
